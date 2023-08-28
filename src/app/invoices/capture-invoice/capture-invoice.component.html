@@ -1,0 +1,85 @@
+<h2 mat-dialog-title>Create New Invoice</h2>
+<mat-dialog-content>
+  <div class="invoice-options">
+    <mat-form-field>
+      <input matInput [matDatepicker]="dueDatePicker" placeholder="Due Date"/>
+      <mat-datepicker-toggle matSuffix [for]="dueDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #dueDatePicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="filter-status">
+      <mat-label>Client</mat-label>
+      <mat-select>
+        <mat-option value="pending">Alchemed</mat-option>
+        <mat-option value="paid">Magic Cloud</mat-option>
+        <mat-option value="overdue">Charles</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-mini-fab (click)="addLesson()">
+      <mat-icon class="add-course-btn">add</mat-icon>
+    </button>
+  </div>
+  <mat-card>
+    <mat-card-content>
+
+      <div class="add-lessons-form" [formGroup]="invoiceForm">
+        <ng-container formArrayName="invoiceLines">
+          <div class="app-grid">
+            <label>Description</label>
+            <label class="amount">Price</label>
+            <label class="duration">Qty</label>
+            <label class="amount">Total</label>
+            <label>...</label>
+          </div>
+          <ng-container *ngFor="let invoiceLineForm of invoiceLines.controls; let i = index">
+            <form [formGroup]="formGroup(invoiceLineForm)">
+              <div class="app-grid">
+                <textarea formControlName="description"></textarea>
+                <input type="number" formControlName="duration" class="duration">
+                <input type="number" formControlName="price" class="price">
+                <input type="number" formControlName="total" class="total">
+                <mat-icon class="delete-btn" (click)="deleteLesson(i)">
+                  delete_forever
+                </mat-icon>
+              </div>
+            </form>
+          </ng-container>
+        </ng-container>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="invoice-footer">
+    <div class="actions-btns" >
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-raised-button color="primary" [mat-dialog-close]="true" (click)="saveInvoice()">Save</button>
+    </div>
+    <div class="invoice-totals" >
+      Invoice Total : {{invoiceTotal | currency : 'R'}}
+    </div>
+  </div>
+ </mat-dialog-actions>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

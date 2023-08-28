@@ -1,0 +1,21 @@
+.filter-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.filter-search {
+  width: 300px;
+}
+
+.filter-age, .filter-status {
+  width: 150px;
+}
+
+.create-button {
+  min-width: 200px;
+}

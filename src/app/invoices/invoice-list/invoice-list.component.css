@@ -1,0 +1,26 @@
+.mat-elevation-z8 {
+  width: 100%;
+  overflow: auto;
+  max-height: 300px; /* Set a max height to enable scrolling */
+  margin-top: 20px;
+}
+/*.invoices-table {*/
+/*  height: 300px; !* Adjust the height as needed *!*/
+/*  overflow-y: auto; !* Enable vertical scrolling *!*/
+/*}*/
+.invoices-summary{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+   width: 100%;
+  grid-column-gap: 10px;
+  grid-row-gap: 2px;
+}
+.grid-item{
+  display: grid;
+  margin-top: 5px;
+  height: 35px;
+  border: 0.5px solid  lightgray;
+  border-radius: 5px;
+  justify-content: center;
+
+}
