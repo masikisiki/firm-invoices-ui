@@ -1,0 +1,79 @@
+<mat-card>
+  <mat-card-header>
+    <h2>Record Invoice</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field>
+      <mat-label>Invoice Date</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="invoiceDate">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Select Client</mat-label>
+      <mat-select [(ngModel)]="selectedClient" (ngModelChange)="clientSelectionChanged($event)">
+        <mat-option *ngFor="let client of clients" [value]="client">
+          {{client.clientName}} @  {{client.rate}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
+<div class="grid-container">
+  <div class="header-container">
+    <div class="header"></div>
+    <div class="header description">Description</div>
+    <div class="header col-qty">Qty</div>
+    <div class="header col-amount">Unit Price</div>
+    <div class="header col-total">Total</div>
+    <div class="header col-action">...</div>
+  </div>
+  <form class="form-container" [formGroup]="invoiceForm">
+    <div class="row-cell"></div>
+    <div class="row-cell">
+      <input type="text" formControlName="description">
+    </div>
+    <div class="row-cell">
+      <input type="text" formControlName="qty">
+    </div>
+    <div class="row-cell">
+      <input type="text" formControlName="unitPrice">
+    </div>
+    <div class="row-cell">
+      <input type="text" formControlName="total">
+    </div>
+    <div class="row-cell">
+      <button mat-raised-button (click)="addInvoiceLine()">Add Item</button>
+    </div>
+  </form>
+  <div class="body-container">
+    <div class="body-row-container" *ngFor="let row of invoiceLines">
+      <div class="row-cell">
+        <fa-icon [icon]="faArrowUp"></fa-icon>
+        <fa-icon [icon]="faArrowDown"></fa-icon>
+      </div>
+      <div class="row-cell">{{row.description}}</div>
+      <div class="row-cell">{{row.qty}}</div>
+      <div class="row-cell">{{row.unitPrice}}</div>
+      <div class="row-cell">{{row.total}}</div>
+      <div class="row-cell actions">
+        <fa-icon [icon]="faEdit"></fa-icon>
+        <fa-icon [icon]="faRemove"></fa-icon>
+      </div>
+    </div>
+  </div>
+  <div class="footer-container">
+    <div class="total-values">
+      <div class="units">
+        <p>Units </p>
+        <p>{{invoiceUnits | number}}</p></div>
+      <div class="invoice-amount">
+        <p>Total</p>
+        <p>{{invoiceTotal | currency : 'R'}}</p></div>
+    </div>
+    <div>
+       <button mat-raised-button color="warn">Cancel</button>
+      <button mat-raised-button color="primary" (click)="saveInvoice();">Save Invoice</button>
+    </div>
+  </div>
+</div>

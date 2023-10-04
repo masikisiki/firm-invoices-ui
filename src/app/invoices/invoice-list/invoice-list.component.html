@@ -1,8 +1,70 @@
-
-<app-invoice-filters></app-invoice-filters>
+<div class="row-first">
+  <div class="page-title">
+    <p>Record, manage and export invoices... </p>
+  </div>
+  <div class="widget-container">
+    <div class="widget totals-widget">
+      <mat-card class="month-card"  >
+        <div class="month-info">
+          <div class="month-name">
+            <div style="display: flex">
+              <p>TOTAL</p>
+            </div>
+          </div>
+          <div class="month-amount">{{ filteredInvoiceTotal | currency : 'R' }}</div>
+        </div>
+      </mat-card>
+    </div>
+    <div class="widget">
+      <div class="status-count" *ngFor="let status of statusCounts">
+        <mat-icon class="status-icon">{{ status.icon }}</mat-icon>
+        <div class="count">{{ status.count }}</div>
+      </div>
+    </div>
+    <div class="widget months-widget">
+      <mat-card class="month-card" *ngFor="let top of top2MonthTrends">
+        <!--      <mat-icon class="calendar-icon">date_range</mat-icon>-->
+        <div class="month-info">
+          <div class="month-name">
+            <mat-icon class="calendar-icon">date_range</mat-icon>
+            <div style="display: flex">
+              <span >{{ top.month }}</span>
+              <mat-icon class="trend-icon" *ngIf="top.trend == 'DOWN'">trending_down</mat-icon>
+              <mat-icon class="trend-icon" *ngIf="top.trend == 'UP'">trending_up</mat-icon>
+            </div>
+          </div>
+          <div class="month-amount">{{ top.amount | currency : 'R' }}</div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<div class="filter-box">
+  <mat-form-field class="filter-search">
+    <input matInput placeholder="Search" [(ngModel)]="searchTerm" (ngModelChange)="applyFilters()"  />
+    <button mat-button matSuffix>
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field class="filter-age">
+    <mat-label>Age Filter</mat-label>
+    <mat-select  [(ngModel)]="selectedDateFilter" (ngModelChange)="dateFilterChanged()">
+      <mat-option [value]="ageFilter.date" *ngFor="let ageFilter  of ageFilterOptions">{{ageFilter.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="filter-status">
+    <mat-label>Status</mat-label>
+    <mat-select [(ngModel)]="invoiceStatusFilter" (ngModelChange)="applyFilters()">
+      <mat-option [value]="option" *ngFor="let option of invoiceStatusFilterOptions">{{option}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-raised-button color="primary" class="create-button"
+          (click)="openNewInvoiceDialog()">Create New Invoice
+  </button>
+</div>
 
 <div class="invoices-table">
-<mat-table [dataSource]="invoiceSummary" class="mat-elevation-z8">
+<mat-table [dataSource]="filteredInvoices" class="mat-elevation-z8">
   <ng-container matColumnDef="invoiceNumber">
     <mat-header-cell *matHeaderCellDef> Invoice Number </mat-header-cell>
     <mat-cell *matCellDef="let invoice"> {{ invoice.invoiceNumber }} </mat-cell>
@@ -36,6 +98,7 @@
       </button>
       <mat-menu #actionsMenu="matMenu">
         <button mat-menu-item (click)="launchInvoiceEdit(invoice)">Edit</button>
+        <button mat-menu-item (click)="launchInvoicePreview(invoice)">Preview</button>
         <button mat-menu-item>Delete</button>
       </mat-menu>
     </mat-cell>
@@ -45,12 +108,4 @@
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
-</div>
-<div class="invoices-summary">
-  <div class="grid-item">
-    PAID : 10
-  </div>
-  <div class="grid-item">PENDING : 10</div>
-  <div class="grid-item">DRAFT : 10</div>
-
 </div>

@@ -2,12 +2,14 @@ export  type SalesInvoiceLine = {
   lineNo: number;
   description: string;
   duration: number;
+  quantity: number;
+  unitPrice: number;
   amount: number;
   invoiceNumber: string;
   __typename: string;
 };
 
-export  type SalesInvoiceHeader = {
+export type SalesInvoiceHeader = {
   invoiceNumber: string;
   configurationId: number;
   clientName: string;
@@ -16,6 +18,7 @@ export  type SalesInvoiceHeader = {
   chargeRate: number;
   totalDuration: number;
   invoiceDate: string;
+  dueDate: string;
   status: string;
   __typename: string;
 };

@@ -1,0 +1,81 @@
+
+.grid-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-container,
+.body-row-container,
+.form-container{
+  display: grid;
+  grid-template-columns: 80px 380px repeat(4, 120px);
+  align-items: center;
+  grid-row-gap: 3px;
+}
+.body-container{
+  max-height: 320px;
+  overflow-y: auto;
+}
+.header-container {
+  background-color: #f0f0f0;
+  font-weight: bold;
+  padding: 15px;
+}
+.footer-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 35px;
+  gap: 5px;
+  padding: 3px;
+  div{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 30px;
+    &.total-values{
+      display: flex;
+      .units{ display: flex; justify-content: flex-end}
+      .invoice-amount{ display: flex; justify-content: flex-start}
+    }
+  }
+}
+.body-row-container {
+  border-bottom: 1px solid #ccc;
+}
+
+.row-cell {
+  padding: 8px;
+  input{
+    height: 30px;
+    border: 0.05rem solid lightgray;
+    padding: 2px;
+    border-radius: 5px;
+    outline: none;
+    &:hover{
+      outline: none;
+    }
+  }
+}
+.row-cell.actions{
+  display: flex;
+  justify-content: space-between;
+  margin-right: 5px;
+}
+input[type="text"] {
+  width: 100%;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+mat-card-content, mat-card-header{
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}

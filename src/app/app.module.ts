@@ -12,27 +12,46 @@ import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatDatepicker, MatDatepickerModule} from "@angular/material/datepicker";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import { LoginComponent } from './login/login.component';
+import { AuthErrorComponent } from './auth-error/auth-error.component';
+import {AuthInterceptor} from "./auth-error.interceptor";
+import {AuthErrorInterceptor} from "./auth.interceptor";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppLayoutComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    LoginComponent,
+    AuthErrorComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-
+    HttpClientModule,
     AppRoutingModule,
     MaterialModule,
     MatDialogModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    FontAwesomeModule
   ],
-  providers: [MatDialog],
+  providers: [MatDialog,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthErrorInterceptor,
+      multi: true,
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

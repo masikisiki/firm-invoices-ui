@@ -1,14 +1,19 @@
 
 <p>
   <mat-toolbar>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span>My App</span>
+    <div class="logo-container">
+      <img src="assets/firm-logo-black.png" width="31" height="31">
+      <h3>FIRM INVOICES</h3>
+    </div>
     <span class="spacer"></span>
-    <button mat-button routerLink="/">Home</button>
+<!--    <button mat-button routerLink="/">Home</button>-->
+    <button mat-button routerLink="/expenses">Expense</button>
+    <button mat-button routerLink="/">Notes</button>
     <button mat-button routerLink="/invoices">Invoices</button>
-    <button mat-button routerLink="/about">About</button>
+    <div class="singing">
+      <button class="sign-in" *ngIf="!isAuthenticated" mat-button routerLink="/login">Login</button>
+      <button class="sign-out" *ngIf="isAuthenticated" mat-button (click)="logout()">Logout</button>
+    </div>
   </mat-toolbar>
 </p>
 
