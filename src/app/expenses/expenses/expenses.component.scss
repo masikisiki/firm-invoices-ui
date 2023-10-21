@@ -1,0 +1,71 @@
+.page-container {
+  display: grid;
+  grid-template-columns: 235px 3fr 1fr;
+  grid-column-gap: 10px;
+  height: calc(100vh - 76px);
+  background-color: #ffffff;
+
+  .side-left, .side-right {
+    border-radius: 6px;
+    background: #f4f4f6;
+  }
+
+  .main-content {
+    //background-color: #ffffff;
+    background-color: #ffffff;
+  }
+}
+
+.expense-category {
+  display: flex;
+  flex-direction: column;
+
+  .expense-category-item {
+    font-size: 9pt;
+    margin: 2px 15px;
+    color: #676767;
+    display: flex;
+    justify-content: flex-start;
+  align-content: center;
+    &:hover {
+      color: black;
+      cursor: pointer;
+      font-weight: 600;
+    }
+  }
+
+  h3.expense-category-item {
+    font-size: 10pt;
+    font-weight: 600;
+    color: black;
+  }
+}
+
+div.badge {
+  background-color: darkgray;
+  color: #ffff;
+  font-size: 0.38rem;
+  font-weight: 600;
+  border: 0.01rem solid darkgray;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1px;
+  &:hover {
+    background-color: black;
+    font-weight: 600;
+  }
+}
+
+.content-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.create-expense{
+  //background-color: darkgray;
+
+}

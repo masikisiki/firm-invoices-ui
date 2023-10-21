@@ -1,0 +1,62 @@
+<div class="invoice-container">
+  <div class="header header-1">
+    <div class="logo">
+      <img src="assets/firm-logo-black.png" width="50" height="50">
+      <div style="display: flex; flex-direction: column">
+        <h2>FIRMDEV</h2>
+        <div class="document-type">
+          <span>Invoices</span>
+        </div>
+      </div>
+    </div>
+    <div class="address">
+      <span>191 Bekker Rd, Vorna Valley</span>
+      <span>Midrand, 1686, ZA</span>
+      <span>lizo@firmdev.co.za</span>
+      <span>+27 788 329 139</span>
+    </div>
+  </div>
+  <div class="header header-2" *ngIf="salesInvoice">
+    <div class="issued-for">
+      <div class="invoice-header-column">To</div>
+      <span class="invoice-header-column-value">{{salesInvoice.header.clientName}}</span>
+    </div>
+    <div class="invoice-no">
+      <div class="invoice-header-column">INVOICE NO</div>
+      <span>{{salesInvoice.header.invoiceNumber}}</span>
+    </div>
+    <div class="invoice-no">
+      <div class="invoice-header-column">TOTAL</div>
+      <span class="invoice-header-column-value">{{salesInvoice.header.invoiceAmount | currency : 'R'}}</span>
+    </div>
+    <div class="invoice-no">
+      <div class="invoice-header-column">DATE</div>
+      <span class="invoice-header-column-value">{{salesInvoice.header.invoiceDate | date  : 'dd/MM/yy'}}</span>
+    </div>
+  </div>
+  <div class="lines" *ngIf="salesInvoice">
+    <div class="invoice-line invoice-line-header">
+      <div class="invoice-line-cell">Description</div>
+      <div class="invoice-line-cell">Qty</div>
+      <div class="invoice-line-cell">Unit Price</div>
+      <div class="invoice-line-cell">Total</div>
+    </div>
+    <div *ngFor="let line of salesInvoice.lines" class="invoice-line  invoice-line-content ">
+      <div class="invoice-line-cell">{{line.description}}</div>
+      <div class="invoice-line-cell">{{line.quantity || line['duration']}}</div>
+      <div class="invoice-line-cell">{{line.unitPrice || salesInvoice.header.chargeRate  | number}}</div>
+      <div class="invoice-line-cell">{{line.amount}}</div>
+    </div>
+  </div>
+  <div class="totals">
+    <div class="column">
+      <div>Invoice Total</div>
+      <div class="invoice-total-value">{{salesInvoice!.header.invoiceAmount  | currency : 'R'}}</div>
+    </div>
+  </div>
+</div>
+<div class="invoice-exports">
+  <button mat-raised-button>Print</button>
+  <button mat-raised-button>Export to CSV</button>
+  <button mat-raised-button>Email</button>
+</div>

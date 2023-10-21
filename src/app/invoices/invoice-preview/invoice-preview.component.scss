@@ -1,0 +1,134 @@
+
+.invoice-container {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.header-1 {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  div.logo {
+    display: inline-flex;
+
+    div {
+      h2 {
+        margin-left: 1px;
+        font-size: 20pt;
+        color: #525254;
+        font-weight: 600;
+        margin-bottom: 0;
+      }
+      .document-type{
+        background: #DE8A1D;
+        border-radius: 4px;
+        padding: 1px 3px;
+        font-size: 0.55rem;
+        height: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: ghostwhite;
+        letter-spacing: 4px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+
+  div.address {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 0.71rem;
+    font-weight: 600;
+    color: #525254;
+  }
+}
+
+.header-2 {
+  display: grid;
+  margin-top: 10px;
+  grid-template-columns: repeat(4, 1fr);
+
+  div:last-child {
+    text-align: end;
+  }
+}
+
+.lines {
+  margin-top: 20px;
+
+  .invoice-line-header {
+    grid-gap: 1px;
+
+    .invoice-line-cell {
+      background-color: #DE8A1D;
+      color: ghostwhite;
+      font-weight: 500;
+      letter-spacing: 0.1rem;
+      padding: 4px;
+    }
+  }
+
+  .invoice-line {
+    display: grid;
+    grid-template-columns: auto 85px 90px 85px;
+    margin-left: 2px;
+    margin-bottom: 1px;
+    //border-bottom: 0.02rem solid #cccc;
+    .invoice-line-cell {
+      padding: 3px 5px;
+    }
+    &.invoice-line-content{
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: #525254;
+    }
+  }
+}
+
+.invoice-header-column {
+  font-weight: 500;
+  font-size: 0.70rem;
+  color: #313030;
+  text-transform: uppercase;
+}
+
+.invoice-header-column-value {
+  font-weight: 600;
+  font-size: 0.62rem;
+  color: #595959;
+}
+
+.totals {
+  display: grid;
+  grid-template-columns:  auto 200px;
+
+  .column {
+    grid-column: 2;
+    margin-top: 10px;
+    align-content: end;
+    justify-content: end;
+    text-align: center;
+    padding: 4px;
+    border-top: 6px solid #DE8A1D;
+
+    .invoice-total-value {
+      padding: 1px;
+      font-size: 0.70rem;
+      font-weight: 600;
+    }
+  }
+}
+
+.invoice-exports {
+  border-top: 1px solid whitesmoke;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
