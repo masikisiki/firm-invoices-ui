@@ -58,9 +58,13 @@
       <mat-option [value]="option" *ngFor="let option of invoiceStatusFilterOptions">{{option}}</mat-option>
     </mat-select>
   </mat-form-field>
-  <button mat-raised-button color="primary" class="create-button"
-          (click)="openNewInvoiceDialog()">Create New Invoice
+  <button mat-raised-button color="primary" class="create-button" mat-button [matMenuTriggerFor]="createMenu"
+          >Create Invoice
   </button>
+   <mat-menu #createMenu="matMenu">
+    <button mat-menu-item (click)="openNewInvoiceDialog()">From Scratch</button>
+    <button mat-menu-item (click)="openTrelloInvoiceDialog()">From Trello</button>
+  </mat-menu>
 </div>
 
 <div class="invoices-table">

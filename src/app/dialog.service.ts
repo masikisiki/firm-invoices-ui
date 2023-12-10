@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import {InvoiceCapturingComponent} from "./invoices/capture-invoice/invoice-capturing.component";
 import {SalesInvoice} from "./Models/sales-invoice";
 import {InvoicePreviewComponent} from "./invoices/invoice-preview/invoice-preview.component";
+import {TrelloTaskSelectorComponent} from "./invoices/trello-task-selector/trello-task-selector.component";
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,12 @@ export class DialogService {
 
   public openNewInvoiceDialog() {
     this.dialog.open(InvoiceCapturingComponent, {
+      width: '100%' // Adjust the width as needed
+    });
+  }
+
+  public openTrelloInvoiceDialog() {
+    this.dialog.open(TrelloTaskSelectorComponent, {
       width: '100%' // Adjust the width as needed
     });
   }

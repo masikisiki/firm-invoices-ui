@@ -17,6 +17,8 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatCardModule} from "@angular/material/card";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import { InvoicePreviewComponent } from './invoice-preview/invoice-preview.component';
+import {TrelloTaskSelectorComponent} from "./trello-task-selector/trello-task-selector.component";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 @NgModule({
@@ -24,7 +26,8 @@ import { InvoicePreviewComponent } from './invoice-preview/invoice-preview.compo
     InvoiceListComponent,
     InvoiceCapturingComponent,
     InvoiceFilterPipe,
-    InvoicePreviewComponent
+    InvoicePreviewComponent,
+    TrelloTaskSelectorComponent
   ],
   imports: [
     CommonModule,
@@ -40,6 +43,7 @@ import { InvoicePreviewComponent } from './invoice-preview/invoice-preview.compo
     MatFormFieldModule,
     MatDialogModule,
     MatCardModule,
+    MatCheckboxModule,
     MatDatepickerModule,
     FontAwesomeModule
   ],

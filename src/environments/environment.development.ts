@@ -1,3 +1,3 @@
 export const environment = {
-  apiUrl :"https://fd-api.magicproc.co.za/api"
+  apiUrl :"http://localhost:8080/api"
 };

@@ -1,0 +1,48 @@
+
+ul {
+  display: flex;
+  list-style: none;
+
+  li {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+  }
+}
+
+.board-lane-selection {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  mat-form-field {
+    margin: 0 4px;
+  }
+}
+
+.trello-cards {
+  display: flex;
+  flex-direction: column;
+  margin-left: 45px;
+  align-content: flex-start;
+  align-items: center;
+  max-height:  380px;
+  overflow-y: auto;
+  .card-row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    mat-card {
+      margin: 4px;
+      padding: 2px;
+      width: 400px;
+      mat-card-footer {
+        mat-form-field {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+mat-card.error-card{
+  border: 1px solid #ffc8c8;
+}

@@ -1,0 +1,62 @@
+<h1 class="mat-typography matHeadline" style="text-align: center; margin-top: 5px">Create draft invoice from trello
+  tasks...</h1>
+<div style="display:  flex; justify-content: center">
+  <ul>
+    <li *ngFor="let step of taskSelectorSteps; let  i = index ">
+      <a [routerLink]="step.active ? '':null" style="padding-right: 3px">{{ step.name }}</a>
+      <mat-icon *ngIf="i < taskSelectorSteps.length -1" style="font-size: 12px; padding: 0 3px"> double_arrow</mat-icon>
+    </li>
+  </ul>
+</div>
+
+<div class="board-lane-selection">
+  <mat-form-field>
+    <mat-label>Trello Boards</mat-label>
+    <mat-select [(ngModel)]="selectedTrelloBoard" (ngModelChange)="boardSelectionChanged($event)">
+      <mat-option *ngFor="let board of trelloBoards" [value]="board">{{ board.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="selectedTrelloBoard">
+    <mat-label>Swim Lane</mat-label>
+    <mat-select [(ngModel)]="selectedTrelloSwimLane" (ngModelChange)="swimLaneSelectionChanged($event)">
+      <mat-option *ngFor="let lane of trelloSwimLanes" [value]="lane">{{ lane.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div class="trello-cards" [formGroup]="trelloCardsForm">
+  <div class="card-row" *ngFor="let card of trelloCards; let i = index" [formGroup]="formGroupAt(i)">
+    <mat-card [ngClass]="hasError(i,'qtyRequired') ? 'error-card':''">
+      <mat-card-content>
+        {{ card.name }}
+      </mat-card-content>
+      <mat-card-footer>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Qty / Duration</mat-label>
+          <input matInput placeholder="Qty / Duration" formControlName="qtyDuration">
+        </mat-form-field>
+      </mat-card-footer>
+    </mat-card>
+    <mat-checkbox class="example-margin" formControlName="selected"/>
+  </div>
+</div>
+<mat-card style="text-align: center; margin: 5px auto auto;">
+  <mat-card-content style="display: flex; justify-content: space-around; align-items: center">
+    <div>
+      <h2 mat-typography matHeadline>Total Units</h2>
+      <p mat-typography>{{ totalSelectedQtyDuration }}</p>
+    </div>
+    <mat-form-field>
+      <mat-label>Select Client</mat-label>
+      <mat-select [(ngModel)]="selectedClient">
+        <mat-option *ngFor="let client of invoiceConfigs" [value]="client">
+          {{ client.clientName }} @  {{ client.rate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" [disabled]="totalSelectedQtyDuration === 0 || !selectedClient"
+            (click)="generateTrelloBasedDraftSalesInvoice()"> Save Draft Invoice
+    </button>
+  </mat-card-content>
+</mat-card>

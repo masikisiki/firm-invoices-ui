@@ -1,13 +1,10 @@
-import {Component} from '@angular/core';
+import {Component, Pipe, PipeTransform} from '@angular/core';
 import {InvoiceService} from "../../invoice.service";
 import {DialogService} from "../../dialog.service";
 import {SalesInvoice} from "../../Models/sales-invoice";
 import {ClientInvoiceConfig} from "../../Models/invoice-config";
-import {addDays, addMonths, format, parse, startOfMonth, startOfYear} from 'date-fns';
-
-import {Pipe, PipeTransform} from '@angular/core';
+import {addMonths, format, startOfMonth, startOfYear} from 'date-fns';
 import {MatTableDataSource} from "@angular/material/table";
-import {fi} from "date-fns/locale";
 
 type InvoiceStatusFilter = 'PAID' | 'PENDING' | 'CANCELLED' | 'OVERDUE' | 'ALL';
 
@@ -142,7 +139,7 @@ export class InvoiceListComponent {
 
   public get top2MonthTrends() {
     const top3 = (this.salesInvoices || [])
-      .filter(inv => inv.header.invoiceAmount >  3500)
+      .filter(inv => inv.header.invoiceAmount > 3500)
       .sort((a, b) => a.header.invoiceDate > b.header.invoiceDate ? -1 : 1);
     if (top3?.length > 3) {
       const recent1 = top3[0];
@@ -152,12 +149,12 @@ export class InvoiceListComponent {
         {
           month: format(new Date(recent2.header.invoiceDate), 'LLL'),
           amount: recent2.header.invoiceAmount,
-          trend: recent2.header.invoiceAmount > recent3.header.invoiceAmount ? 'UP':'DOWN'
+          trend: recent2.header.invoiceAmount > recent3.header.invoiceAmount ? 'UP' : 'DOWN'
         },
         {
           month: format(new Date(recent1.header.invoiceDate), 'LLL'),
           amount: recent1.header.invoiceAmount,
-          trend: recent1.header.invoiceAmount > recent2.header.invoiceAmount ? 'UP':'DOWN'
+          trend: recent1.header.invoiceAmount > recent2.header.invoiceAmount ? 'UP' : 'DOWN'
         }
       ]
     }
@@ -175,6 +172,10 @@ export class InvoiceListComponent {
 
   openNewInvoiceDialog() {
     this.dialogService.openNewInvoiceDialog();
+  }
+
+  openTrelloInvoiceDialog() {
+    this.dialogService.openTrelloInvoiceDialog();
   }
 
   applyFilters() {
